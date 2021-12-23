@@ -7,16 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    
-<h1>Latest Posts</h1>
+    <h1>Latest Posts</h1>
 
-<ul>
-    {% for p in post_list %}
-    <li>
-    <strong>{{ p.title }}:</strong>  created {{ p.created_at|timesince }} ago {{ p.get_status_display }}
-    </li>
-    {% endfor %}
-</ul>
-
+    <ul>
+        {% for p in post_list %}
+        <li>
+            <a href="{% url 'post_details_slug' p.slug %}">
+            {{ p.title }}: 
+            </a>
+            <strong>Created {{ p.created_at|timesince }} ago </strong>, status is {{ p.get_status_display }},
+            comments: {{ p.comment_set.count }}
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
